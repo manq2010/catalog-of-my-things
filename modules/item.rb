@@ -1,6 +1,6 @@
 class Item
-  attr_accessor :genre, :author, :label, :published_date
-  attr_reader :id, :archived
+  attr_accessor :genre, :author, :published_date
+  attr_reader :id, :archived, :label
 
   def initialize(published_date, archived: true)
     @id = Random.rand(0...1000)
@@ -15,6 +15,7 @@ class Item
   def label=(label)
     @label = label
     @label.items.push(self) unless label.items.include?(self)
+  end
 
   private
 

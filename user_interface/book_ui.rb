@@ -1,10 +1,20 @@
 require_relative '../modules/book'
+require 'json'
 
 class BookUserInterface
+  FILE_LOCATION = './data/books.json'.freeze
   attr_accessor :books
 
   def initialize
-    @books = []
+    @books = load
+  end
+
+  def load
+    File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
+  end
+
+  def save
+    File.write(FILE_LOCATION, JOSN.pretty_generate(@books))
   end
 
   def list_all_books
@@ -18,7 +28,8 @@ class BookUserInterface
   def add_a_book
     publisher = handle_publisher_input
     cover_state = handle_cover_state_input
-    @books << Book.new(publisher, cover_state)
+    @books << Book.new(publisher, cover_state).to_json
+    save
   end
 
   def handle_publisher_input

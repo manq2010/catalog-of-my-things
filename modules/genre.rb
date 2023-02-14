@@ -8,6 +8,5 @@ class Genre < Item
     @items = []
   end
 
-  def add_item
-  end
+  def add_item; end
 end

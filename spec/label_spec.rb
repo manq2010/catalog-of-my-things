@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Label do
   let(:label) { Label.new('Gift', 'blue') }
-  let(:item) { Item.new('2023-02-14') }
+  let(:item) { Item.new(2022) }
 
   describe '#initialize' do
     it 'creates a new Label object' do

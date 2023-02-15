@@ -1,4 +1,14 @@
+require_relative './user_interface/book_ui'
+require_relative './user_interface/label_ui'
+
 class Main
+  attr_accessor :book, :label
+
+  def initialize
+    @book = BookUserInterface.new
+    @label = LabelUserInterface.new
+  end
+
   def options
     puts [
       '1- List all books',
@@ -20,7 +30,7 @@ class Main
   def processed_input(input)
     case input
     when 1
-      puts '1- List all books'
+      @book.list_all_books
     when 2
       puts '2- List all music albums'
     when 3
@@ -30,7 +40,7 @@ class Main
     when 5
       puts '5- List all genres'
     when 6
-      puts '6- List all labels (e.g. \'Gift\', \'New\')'
+      @label.list_all_labels
     end
   end
 
@@ -41,7 +51,7 @@ class Main
     when 8
       puts '8- List all sources (e.g. \'From a friend\', \'Online shop\')'
     when 9
-      puts '9- Add a book'
+      @book.add_a_book
     when 10
       puts '10- Add a music album'
     when 11

@@ -14,14 +14,14 @@ class BookUserInterface
   end
 
   def save
-    File.write(FILE_LOCATION, JOSN.pretty_generate(@books))
+    File.write(FILE_LOCATION, JSON.pretty_generate(@books))
   end
 
   def list_all_books
-    puts ['No published books', ''] if @books.empty?
+    puts ['No published books tests', ''] if @books.empty?
 
     @books.each do |book|
-      puts "Publisher: #{book.publisher}, Cover State: #{book.cover_state}"
+      puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
     end
   end
 
@@ -33,10 +33,12 @@ class BookUserInterface
   end
 
   def handle_publisher_input
+    puts 'Publisher: '
     gets.chomp.capitalize
   end
 
   def handle_cover_state_input
+    puts 'CoverState: '
     gets.chomp.capitalize
   end
 end

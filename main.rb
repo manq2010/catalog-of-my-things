@@ -51,7 +51,7 @@ class Main
     when 8
       puts '8- List all sources (e.g. \'From a friend\', \'Online shop\')'
     when 9
-      @books.add_a_book
+      @book.add_a_book
     when 10
       puts '10- Add a music album'
     when 11

@@ -8,5 +8,8 @@ class Genre < Item
     @items = []
   end
 
-  def add_item; end
+  def add_items(item)
+    @items << item
+    item.genre = self
+  end
 end

@@ -1,4 +1,9 @@
+require_relative './user_interface/book_ui'
+require_relative './user_interface/label_ui'
+
 class Main
+  attr_accessor :book, :label
+
   def initialize
     @book = BookUserInterface.new
     @label = LabelUserInterface.new

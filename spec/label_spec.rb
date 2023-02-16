@@ -30,9 +30,7 @@ describe Label do
   describe '#to_json' do
     it 'returns a hash representation of the Label object' do
       expect(label.to_json).to eq(
-        { 'id' => label.id,
-          'title' => 'Gift',
-          'color' => 'blue' }
+        { 'title' => 'Gift', 'color' => 'blue' }
       )
     end
   end

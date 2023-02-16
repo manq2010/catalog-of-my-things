@@ -14,5 +14,25 @@
   {
     "publisher": "Paifaj",
     "cover_state": "Fafakcnak;fl"
+  },
+  {
+    "publisher": "C",
+    "cover_state": "a",
+    "published_date": 0
+  },
+  {
+    "publisher": "Aa",
+    "cover_state": "faf",
+    "published_date": 0
+  },
+  {
+    "publisher": "A",
+    "cover_state": "d",
+    "published_date": 0
+  },
+  {
+    "publisher": "Das",
+    "cover_state": "fs",
+    "published_date": 0
   }
 ]

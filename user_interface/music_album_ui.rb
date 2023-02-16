@@ -1,7 +1,6 @@
 require_relative '../modules/music_album'
 require_relative '../modules/item'
 require_relative '../modules/genre'
-require_relative './genre_ui'
 require 'json'
 
 class MusicAlbumUserInterface

@@ -7,7 +7,6 @@ class Main
   def initialize
     @book = BookUserInterface.new
     @music_album = MusicAlbumUserInterface.new
-    # @genre = GenreUserInterface.new
   end
 
   def options

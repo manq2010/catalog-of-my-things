@@ -63,7 +63,7 @@ class Main
       @game.add_game
     when 13
       @authors.save(@authors.load(@game.create_instance_of_game))
-      return
+      nil
     end
   end
 end

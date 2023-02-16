@@ -49,13 +49,11 @@ class GameUserInterface
   end
 
   def handle_input_date(param)
-    begin
-        print param
-        date = gets.chomp
-        Date.parse(date)
-    rescue
-        puts 'Invalid date please enter a valid date yy/mm/dd'
-        handle_input_date(param)
-    end
+    print param
+    date = gets.chomp
+    Date.parse(date)
+  rescue StandardError
+    puts 'Invalid date please enter a valid date yy/mm/dd'
+    handle_input_date(param)
   end
 end

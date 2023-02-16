@@ -1,5 +1,6 @@
 require_relative './user_interface/book_ui'
 require_relative './user_interface/game_ui'
+require_relative './user_interface/author_ui'
 
 class Main
   attr_accessor :book, :label, :game
@@ -7,6 +8,7 @@ class Main
   def initialize
     @book = BookUserInterface.new
     @game = GameUserInterface.new
+    @authors = AuthorUserInterface.new
   end
 
   def options
@@ -47,7 +49,8 @@ class Main
   def processed_input2(input)
     case input
     when 7
-      puts '7- List all authors (e.g. \'Stephen King\')'
+      @authors.list_authors
+      puts ''
     when 8
       puts '8- List all sources (e.g. \'From a friend\', \'Online shop\')'
     when 9
@@ -58,6 +61,9 @@ class Main
       puts '11- Add a movie'
     when 12
       @game.add_game
+    when 13
+      @authors.save(@authors.load(@game.create_instance_of_game))
+      return
     end
   end
 end

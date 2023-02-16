@@ -17,12 +17,19 @@ class GameUserInterface
     File.write(FILE_LOCATION, JSON.pretty_generate(@games))
   end
 
+  def create_instance_of_game
+    games = []
+    @games.each do |game|
+      games << Game.new(game['name'], game['publish_date'], game['last_played_at'], game['multiplayer'])
+    end
+    games
+  end
+
   def list_all_games
     puts 'No games created' if @games.empty?
-
     @games.each do |game|
-      print "Game name: #{game['name']} Publish date: #{game['publish_date']}"
-      print " Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
+      puts "Game name: #{game['name']} Publish date: #{game['publish_date']}"
+      puts " Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
     end
   end
 

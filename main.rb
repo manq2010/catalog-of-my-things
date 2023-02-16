@@ -1,5 +1,4 @@
 require_relative './user_interface/book_ui'
-require_relative './user_interface/label_ui'
 require_relative './user_interface/game_ui'
 
 class Main
@@ -7,7 +6,6 @@ class Main
 
   def initialize
     @book = BookUserInterface.new
-    @label = LabelUserInterface.new
     @game = GameUserInterface.new
   end
 
@@ -42,7 +40,7 @@ class Main
     when 5
       puts '5- List all genres'
     when 6
-      @label.list_all_labels
+      @book.list_all_labels
     end
   end
 

@@ -1,89 +1,82 @@
 require_relative '../modules/book'
 require_relative '../modules/item'
 require_relative '../modules/label'
-require_relative './label_ui'
 require 'json'
 
 class BookUserInterface
-  FILE_LOCATION = './data/books.json'.freeze
-  FILE_LOCATION2 = './data/labels.json'.freeze
-
-  attr_accessor :books, :items
+  FILE_LOCATIONS = {
+    books: './data/books.json',
+    labels: './data/labels.json'
+  }.freeze
 
   def initialize
-    @books = load
-    @items = load_two
-  end
-
-  def load
-    File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
-  end
-
-  def load_two
-    File.zero?(FILE_LOCATION2) ? [] : JSON.parse(File.read(FILE_LOCATION2))
-  end
-
-  def save
-    File.write(FILE_LOCATION, JSON.pretty_generate(@books))
-    File.write(FILE_LOCATION2, JSON.pretty_generate(@items))
+    @books = load_data(:books)
+    @labels = load_data(:labels)
   end
 
   def list_all_books
-    puts ['No published books tests', ''] if @books.empty?
-
-    @books.each do |book|
-      puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
+    if @books.empty?
+      puts 'No published books found.'
+    else
+      @books.each do |book|
+        puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
+      end
     end
   end
 
   def add_a_book
-    title = handle_label_title_input
-    publisher = handle_publisher_input
-    published_date = handle_published_year
-    cover_state = handle_cover_state_input
-    color = handle_label_color_input
-    @books << Book.new(publisher, cover_state, published_date).to_json
-    puts @books
-    item = Label.new(title, color)
-    @items << item.to_json
-    item.add_items(@items)
-    save
-  end
-
-  def items_handle
-    @items
-  end
-
-  def handle_publisher_input
-    print 'Publisher: '
-    gets.chomp.capitalize
-  end
-
-  def handle_published_year
-    print 'Published year: '
-    gets.chomp.to_i
-  end
-
-  def handle_cover_state_input
-    print 'CoverState i.e. new/bad: '
-    gets.chomp
+    book = create_book
+    @books << book.to_json
+    label = create_label
+    @labels << label.to_json
+    label.add_items(@labels)
+    save_data
   end
 
   def list_all_labels
-    puts ['No label found', ''] if @items.empty?
-
-    @items.each do |item|
-      puts "Title: #{item['title']}, Color: #{item['color']}"
+    if @labels.empty?
+      puts 'No labels found.'
+    else
+      @labels.each do |label|
+        puts "Title: #{label['title']}, Color: #{label['color']}"
+      end
     end
   end
 
-  def handle_label_title_input
-    print 'Title: '
-    gets.chomp
+  private
+
+  def load_data(type)
+    path = FILE_LOCATIONS[type]
+    if File.zero?(path)
+      []
+    else
+      JSON.parse(File.read(path))
+    end
   end
 
-  def handle_label_color_input
-    print 'Color: '
-    gets.chomp
+  def save_data
+    FILE_LOCATIONS.each do |type, path|
+      data = instance_variable_get("@#{type}")
+      File.write(path, JSON.pretty_generate(data))
+    end
+  end
+
+  def create_book
+    publisher = prompt_input('Publisher')
+    published_date = prompt_input('Published year', &:to_i)
+    cover_state = prompt_input('Cover state (e.g. new/bad)')
+    Book.new(publisher, cover_state, published_date)
+  end
+
+  def create_label
+    title = prompt_input('Title')
+    color = prompt_input('Color')
+    Label.new(title, color)
+  end
+
+  def prompt_input(message, &block)
+    print "#{message}: "
+    input = gets.chomp
+    block ? block.call(input) : input
   end
 end

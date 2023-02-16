@@ -1,10 +1,18 @@
 [
   {
-    "title": "ded",
-    "color": "a"
+    "title": "Test title",
+    "color": "yellow"
   },
   {
-    "title": "faff",
-    "color": "f"
+    "title": "the book",
+    "color": "red"
+  },
+  {
+    "title": "ere",
+    "color": "rer"
+  },
+  {
+    "title": "ew",
+    "color": "ew"
   }
 ]

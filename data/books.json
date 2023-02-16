@@ -1,38 +1,22 @@
 [
   {
-    "publisher": "Ewew",
-    "cover_state": "Dasda"
+    "publisher": "Test publisher",
+    "cover_state": "new",
+    "published_date": 2017
   },
   {
-    "publisher": "teroa",
-    "cover_state": "hfjadhfakfha"
+    "publisher": "rer",
+    "cover_state": "new",
+    "published_date": 2014
   },
   {
-    "publisher": "Faca",
-    "cover_state": "Etwtw"
-  },
-  {
-    "publisher": "Paifaj",
-    "cover_state": "Fafakcnak;fl"
-  },
-  {
-    "publisher": "C",
-    "cover_state": "a",
+    "publisher": "ere",
+    "cover_state": "r",
     "published_date": 0
   },
   {
-    "publisher": "Aa",
-    "cover_state": "faf",
-    "published_date": 0
-  },
-  {
-    "publisher": "A",
-    "cover_state": "d",
-    "published_date": 0
-  },
-  {
-    "publisher": "Das",
-    "cover_state": "fs",
-    "published_date": 0
+    "publisher": "re",
+    "cover_state": "ew",
+    "published_date": 2011
   }
 ]

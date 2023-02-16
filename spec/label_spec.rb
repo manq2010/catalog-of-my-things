@@ -23,7 +23,6 @@ describe Label do
     it 'add items' do
       label.add_items(item)
       expect(label.items).to include(item)
-      #   expect(label.items).to eq(item)
     end
   end
 

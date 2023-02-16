@@ -18,5 +18,10 @@
     "publisher": "re",
     "cover_state": "ew",
     "published_date": 2011
+  },
+  {
+    "publisher": "moncobo",
+    "cover_state": "bad",
+    "published_date": 2020
   }
 ]

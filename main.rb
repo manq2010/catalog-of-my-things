@@ -40,7 +40,7 @@ class Main
     when 5
       puts '5- List all genres'
     when 6
-      @label.list_all_labels
+      @book.list_all_labels
     end
   end
 

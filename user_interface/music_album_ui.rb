@@ -30,8 +30,8 @@ class MusicAlbumUserInterface
   def list_all_music_albums
     puts ['No Music Album available', ''] if @music_albums.empty?
 
-    @music_albums.each do |music_album|
-      puts "On Spotify: #{music_album['on_spotify']}"
+    @music_albums.each_with_index do |music_album, index|
+      puts "#{index + 1}) On Spotify: #{music_album['on_spotify']}"
     end
   end
 
@@ -64,8 +64,8 @@ class MusicAlbumUserInterface
   def list_all_genres
     puts ['No label found', ''] if @items.empty?
 
-    @items.each do |item|
-      puts "Name: #{item['name']}"
+    @items.each_with_index do |item, index|
+      puts "#{index + 1}) Name: #{item['name']}"
     end
   end
 

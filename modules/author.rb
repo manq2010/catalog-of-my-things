@@ -15,4 +15,13 @@ class Author
     @items << item unless items.include?(self)
     item.author = self
   end
+
+  def to_json(*_args)
+    {
+      'id' => @id,
+      'first_name' => @first_name,
+      'last_name' => @last_name,
+      'items' => @items.map(&:id)
+    }
+  end
 end

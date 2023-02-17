@@ -1,44 +1,82 @@
 require_relative '../modules/book'
+require_relative '../modules/item'
+require_relative '../modules/label'
 require 'json'
 
 class BookUserInterface
-  FILE_LOCATION = './data/books.json'.freeze
-  attr_accessor :books
+  FILE_LOCATIONS = {
+    books: './data/books.json',
+    labels: './data/labels.json'
+  }.freeze
 
   def initialize
-    @books = load
-  end
-
-  def load
-    File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
-  end
-
-  def save
-    File.write(FILE_LOCATION, JSON.pretty_generate(@books))
+    @books = load_data(:books)
+    @labels = load_data(:labels)
   end
 
   def list_all_books
-    puts ['No published books tests', ''] if @books.empty?
-
-    @books.each do |book|
-      puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
+    if @books.empty?
+      puts 'No published books found.'
+    else
+      @books.each do |book|
+        puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
+      end
     end
   end
 
   def add_a_book
-    publisher = handle_publisher_input
-    cover_state = handle_cover_state_input
-    @books << Book.new(publisher, cover_state).to_json
-    save
+    book = create_book
+    @books << book.to_json
+    label = create_label
+    @labels << label.to_json
+    label.add_items(@labels)
+    save_data
   end
 
-  def handle_publisher_input
-    puts 'Publisher: '
-    gets.chomp.capitalize
+  def list_all_labels
+    if @labels.empty?
+      puts 'No labels found.'
+    else
+      @labels.each do |label|
+        puts "Title: #{label['title']}, Color: #{label['color']}"
+      end
+    end
   end
 
-  def handle_cover_state_input
-    puts 'CoverState: '
-    gets.chomp.capitalize
+  private
+
+  def load_data(type)
+    path = FILE_LOCATIONS[type]
+    if File.zero?(path)
+      []
+    else
+      JSON.parse(File.read(path))
+    end
+  end
+
+  def save_data
+    FILE_LOCATIONS.each do |type, path|
+      data = instance_variable_get("@#{type}")
+      File.write(path, JSON.pretty_generate(data))
+    end
+  end
+
+  def create_book
+    publisher = prompt_input('Publisher')
+    published_date = prompt_input('Published year', &:to_i)
+    cover_state = prompt_input('Cover state (e.g. new/bad)')
+    Book.new(publisher, cover_state, published_date)
+  end
+
+  def create_label
+    title = prompt_input('Title')
+    color = prompt_input('Color')
+    Label.new(title, color)
+  end
+
+  def prompt_input(message, &block)
+    print "#{message}: "
+    input = gets.chomp
+    block ? block.call(input) : input
   end
 end

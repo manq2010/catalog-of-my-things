@@ -1,11 +1,16 @@
 require_relative './user_interface/book_ui'
+require_relative './user_interface/game_ui'
+require_relative './user_interface/author_ui'
 require_relative './user_interface/music_album_ui'
 
 class Main
+  attr_accessor :book, :label, :game
   attr_accessor :book, :label, :music_album, :genre
 
   def initialize
     @book = BookUserInterface.new
+    @game = GameUserInterface.new
+    @authors = AuthorUserInterface.new
     @music_album = MusicAlbumUserInterface.new
   end
 
@@ -36,18 +41,19 @@ class Main
     when 3
       puts '3- List all movies'
     when 4
-      puts '4- List of games'
+      @game.list_all_games
     when 5
       @music_album.list_all_genres
     when 6
-      @label.list_all_labels
+      @book.list_all_labels
     end
   end
 
   def processed_input2(input)
     case input
     when 7
-      puts '7- List all authors (e.g. \'Stephen King\')'
+      @authors.list_authors
+      puts ''
     when 8
       puts '8- List all sources (e.g. \'From a friend\', \'Online shop\')'
     when 9
@@ -57,7 +63,10 @@ class Main
     when 11
       puts '11- Add a movie'
     when 12
-      puts '12- Add a game'
+      @game.add_game
+    when 13
+      @authors.save(@authors.load(@game.create_instance_of_game))
+      nil
     end
   end
 end

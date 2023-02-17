@@ -1,7 +1,7 @@
 require 'time'
 
 class Item
-  attr_accessor :genre, :author, :published_date, :label, :genre, :author
+  attr_accessor :genre, :published_date, :label, :author
   attr_reader :id, :archived
 
   def initialize(published_date, archived: true)
@@ -16,7 +16,7 @@ class Item
 
   def add_label(label)
     self.label = (label)
-    label.add_item(self) unless label.items.include? (self)
+    label.add_item(self) unless label.items.include?(self)
   end
 
   def add_genre(genre)

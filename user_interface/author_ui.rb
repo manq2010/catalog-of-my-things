@@ -2,54 +2,51 @@ require_relative './game_ui'
 require_relative '../modules/author'
 require 'fileutils'
 
-
 class AuthorUserInterface
   FILE_LOCATION = './data/authors.json'.freeze
 
   def initialize
-    @authors = load(GameUserInterface.new.create_instance_of_game)
+    game_ui = GameUserInterface.new
+    @items = game_ui.create_instance_of_game
+    @authors = load_authors
   end
 
-  def load(items)
-    if File.directory?('data') && File.file?(FILE_LOCATION)
-      if File.zero?(FILE_LOCATION)
-        []
-      else
-        data = JSON.parse(File.read(FILE_LOCATION))
-        authors = []
-        data.each do |author|
-          new_author = Author.new(author['first_name'], author['last_name'])
-          authors << new_author
-  
-          author['items'].each do |item_id|
-            item = items.find { |element| element.id == item_id }
-            author.add_item(item) unless item.nil?
-          end
-        end
-        authors
-      end
-    elsif File.directory?('data') && !File.exist?(FILE_LOCATION)
-      FileUtils.touch(FILE_LOCATION)
-      []
-    else
-      FileUtils.mkdir_p(['data'])
-      FileUtils.touch(FILE_LOCATION)
-      []
-    end
+  def load_authors
+    create_file_if_not_exist
+    return [] if File.zero?(FILE_LOCATION)
+
+    data = JSON.parse(File.read(FILE_LOCATION))
+    data.map { |author_data| build_author_from_data(author_data) }
+  end
+
+  def create_file_if_not_exist
+    FileUtils.mkdir_p(['data']) unless File.directory?('data')
+    FileUtils.touch(FILE_LOCATION) unless File.exist?(FILE_LOCATION)
+  end
+
+  def build_author_from_data(author_data)
+    author = Author.new(author_data['first_name'], author_data['last_name'])
+    add_items_to_author(author, author_data['items'])
+    author
+  end
+
+  def add_items_to_author(author, item_ids)
+    items = @items.select { |item| item_ids.include?(item.id) }
+    items.each { |item| author.add_item(item) }
   end
 
   def list_authors
-    return puts "There is no authors to list!" if @authors.empty?
-    @authors.each_with_index do |author, index|
-      puts "#{index + 1}) Author Name: #{author.first_name} #{author.last_name}"
+    if @authors.empty?
+      puts 'There is no authors to list!'
+    else
+      @authors.each_with_index do |author, index|
+        puts "#{index + 1}) Author Name: #{author.first_name} #{author.last_name}"
+      end
     end
   end
 
   def save(records)
-    serialized = []
-    records.each do |item|
-      serialized << item.to_json
-    end
+    serialized = records.map(&:to_json)
     File.write(FILE_LOCATION, JSON.dump(serialized))
   end
 end

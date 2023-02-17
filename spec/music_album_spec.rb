@@ -23,17 +23,6 @@ describe MusicAlbum do
     end
   end
 
-  # describe '#can_be_archived?' do
-  #   context 'when on_spotify is not false' do
-  #     let(:music_album) { MusicAlbum.new('Nasheed', 2002) }
-
-  #     it 'returns true' do
-  #       allow(music_album).to receive(:on_spotify).and_return('true')
-  #       expect(music_album.send(:can_be_archived?)).to be_truthy
-  #     end
-  #   end
-  # end
-
   describe '#can_be_archived?' do
     context 'when on_spotify is not false' do
       let(:music_album) { MusicAlbum.new(true, 2002) }

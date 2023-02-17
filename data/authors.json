@@ -1,8 +1,12 @@
 [
     {
-        "id": "1",
-        "first_name": "Stephen",
-        "last_name": "King",
-        "items": []
+        "first_name":"Stephen",
+        "last_name":"King",
+        "items":[]
+    },
+    {
+        "first_name":" James",
+        "last_name":"Patterson",
+        "items":[]
     }
 ]

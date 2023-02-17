@@ -4,8 +4,7 @@ require_relative './user_interface/author_ui'
 require_relative './user_interface/music_album_ui'
 
 class Main
-  attr_accessor :book, :label, :game
-  attr_accessor :book, :label, :music_album, :genre
+  attr_accessor :book, :label, :game, :music_album, :genre
 
   def initialize
     @book = BookUserInterface.new

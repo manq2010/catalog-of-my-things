@@ -12,12 +12,11 @@ class Author
   end
 
   def add_item(item)
-    unless items.any? { |i| i.id == item.id }
-      @items << item
-      item.author = self
-    end
+    return if items.any? { |i| i.id == item.id }
+
+    @items << item
+    item.author = self
   end
-  
 
   def to_json(*_args)
     {

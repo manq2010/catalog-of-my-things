@@ -27,7 +27,7 @@ class AuthorUserInterface
 
   def list_authors
     @authors.each_with_index do |author, index|
-      puts "#{index}) Author Name: #{author.first_name} #{author.last_name}"
+      puts "#{index + 1}) Author Name: #{author.first_name} #{author.last_name}"
     end
   end
 

@@ -29,11 +29,11 @@ describe Author do
       author.add_item(item1)
       author.add_item(item2)
       expect(author.to_json).to eq({
-        'id' => author.id,
-        'first_name' => 'J.K.',
-        'last_name' => 'Rowling',
-        'items' => [item1.id, item2.id]
-      })
+                                     'id' => author.id,
+                                     'first_name' => 'J.K.',
+                                     'last_name' => 'Rowling',
+                                     'items' => [item1.id, item2.id]
+                                   })
     end
   end
 end

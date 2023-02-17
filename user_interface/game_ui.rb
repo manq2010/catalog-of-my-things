@@ -27,8 +27,8 @@ class GameUserInterface
 
   def list_all_games
     puts 'No games created' if @games.empty?
-    @games.each do |game|
-      puts "Game name: #{game['name']} Publish date: #{game['publish_date']}"
+    @games.each_with_index do |game, index|
+      puts " #{index + 1}) Game name: #{game['name']} Publish date: #{game['publish_date']}"
       puts " Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
     end
   end

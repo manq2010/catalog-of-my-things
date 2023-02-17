@@ -18,8 +18,8 @@ class BookUserInterface
     if @books.empty?
       puts 'No published books found.'
     else
-      @books.each do |book|
-        puts "Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}) Publisher: #{book['publisher']}, Cover State: #{book['cover_state']}"
       end
     end
   end
@@ -37,8 +37,8 @@ class BookUserInterface
     if @labels.empty?
       puts 'No labels found.'
     else
-      @labels.each do |label|
-        puts "Title: #{label['title']}, Color: #{label['color']}"
+      @labels.each_with_index do |label, index|
+        puts "#{index + 1}) Title: #{label['title']}, Color: #{label['color']}"
       end
     end
   end

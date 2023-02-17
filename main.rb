@@ -17,17 +17,14 @@ class Main
     puts [
       '1- List all books',
       '2- List all music albums',
-      '3- List all movies',
-      '4- List of games',
-      '5- List all genres',
-      '6- List all labels (e.g. \'Gift\', \'New\')',
-      '7- List all authors (e.g. \'Stephen King\')',
-      '8- List all sources (e.g. \'From a friend\', \'Online shop\')',
-      '9- Add a book',
-      '10- Add a music album',
-      '11- Add a movie',
-      '12- Add a game',
-      '13- Exit'
+      '3- List of games',
+      '4- List all genres',
+      '5- List all labels (e.g. \'Gift\', \'New\')',
+      '6- List all authors (e.g. \'Stephen King\')',
+      '7- Add a book',
+      '8- Add a music album',
+      '9- Add a game',
+      '10- Exit'
     ]
   end
 
@@ -38,34 +35,25 @@ class Main
     when 2
       @music_album.list_all_music_albums
     when 3
-      puts '3- List all movies'
-    when 4
       @game.list_all_games
-    when 5
+    when 4
       @music_album.list_all_genres
-    when 6
+    when 5
       @book.list_all_labels
     end
   end
 
   def processed_input2(input)
     case input
-    when 7
+    when 6
       @authors.list_authors
       puts ''
-    when 8
-      puts '8- List all sources (e.g. \'From a friend\', \'Online shop\')'
-    when 9
+    when 7
       @book.add_a_book
-    when 10
+    when 8
       @music_album.add_a_music_album
-    when 11
-      puts '11- Add a movie'
-    when 12
+    when 9
       @game.add_game
-    when 13
-      @authors.save(@authors.load(@game.create_instance_of_game))
-      nil
     end
   end
 end
@@ -73,10 +61,10 @@ end
 def main
   main = Main.new
   input = nil
-  until input == 13
+  until input == 10
     main.options
     input = gets.to_i
-    puts 'Invalid choice' if input < 1 || input > 13
+    puts 'Invalid choice' if input < 1 || input > 10
     main.processed_input(input)
     main.processed_input2(input)
   end

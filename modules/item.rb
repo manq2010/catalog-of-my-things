@@ -29,11 +29,7 @@ class Item
     years_since_publication = today.year - @published_date.year
     if years_since_publication >= 2
       years_since_last_played = today.year - @last_played_at.year
-      if years_since_last_played >= 2
-        true
-      else
-        false
-      end
+      years_since_last_played >= 2
     else
       false
     end

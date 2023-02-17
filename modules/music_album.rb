@@ -7,8 +7,7 @@ class MusicAlbum < Item
   end
 
   def to_json(*_args)
-    { 'on_spotify' => @on_spotify, 'published_
-      date' => @published_date }
+    { 'on_spotify' => @on_spotify, 'published_date' => @published_date }
   end
 
   private

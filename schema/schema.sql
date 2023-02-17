@@ -53,3 +53,19 @@ CREATE TABLE
         last_played_at DATE NOT NULL,
         PRIMARY KEY (id)
     );
+
+    
+CREATE TABLE
+    MusicAlbum (
+        id INTEGER NOT NULL,
+        on_spotify VARCHAR(150) NOT NULL,
+        PRIMARY KEY (id)
+    );
+
+CREATE TABLE
+    Genre (
+        id SERIAL NOT NULL,
+        name VARCHAR(50) NOT NULL,
+        publish_date DATE NOT NULL,
+        PRIMARY KEY (id)
+    );

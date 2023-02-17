@@ -1,1 +1,14 @@
-[{"id":7673,"first_name":"Stephen","last_name":"King","items":[]},{"id":4422,"first_name":" James","last_name":"Patterson","items":[]}]
+[
+    {
+        "id": 7673,
+        "first_name": "Stephen",
+        "last_name": "King",
+        "items": []
+    },
+    {
+        "id": 4422,
+        "first_name": " James",
+        "last_name": "Patterson",
+        "items": []
+    }
+]

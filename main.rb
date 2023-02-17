@@ -1,14 +1,16 @@
 require_relative './user_interface/book_ui'
 require_relative './user_interface/game_ui'
 require_relative './user_interface/author_ui'
+require_relative './user_interface/music_album_ui'
 
 class Main
-  attr_accessor :book, :label, :game
+  attr_accessor :book, :label, :game, :music_album, :genre
 
   def initialize
     @book = BookUserInterface.new
     @game = GameUserInterface.new
     @authors = AuthorUserInterface.new
+    @music_album = MusicAlbumUserInterface.new
   end
 
   def options
@@ -34,13 +36,13 @@ class Main
     when 1
       @book.list_all_books
     when 2
-      puts '2- List all music albums'
+      @music_album.list_all_music_albums
     when 3
       puts '3- List all movies'
     when 4
       @game.list_all_games
     when 5
-      puts '5- List all genres'
+      @music_album.list_all_genres
     when 6
       @book.list_all_labels
     end
@@ -56,7 +58,7 @@ class Main
     when 9
       @book.add_a_book
     when 10
-      puts '10- Add a music album'
+      @music_album.add_a_music_album
     when 11
       puts '11- Add a movie'
     when 12

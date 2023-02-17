@@ -25,14 +25,13 @@
     "published_date": 2020
   },
   {
-<<<<<<< HEAD
     "publisher": "ahmed",
     "cover_state": "bad",
     "published_date": 2010
-=======
-    "publisher": "Sheikh Abdulwahab",
+  },
+  {
+    "publisher": "mono",
     "cover_state": "new",
-    "published_date": 785
->>>>>>> develop
+    "published_date": 2030
   }
 ]

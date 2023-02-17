@@ -30,7 +30,6 @@ class BookUserInterface
     @books << book.to_json
     label = create_label
     @labels << label.to_json
-    label.add_items(@labels)
     save_data
   end
 

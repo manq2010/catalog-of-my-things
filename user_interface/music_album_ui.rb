@@ -8,11 +8,11 @@ class MusicAlbumUserInterface
   FILE_LOCATION = './data/music_albums.json'.freeze
   FILE_LOCATION2 = './data/genres.json'.freeze
 
-  attr_accessor :music_albums, :items
+  attr_accessor :music_albums, :genres
 
   def initialize
     @music_albums = load
-    @items = load_two
+    @genres = load_two
   end
 
   def load
@@ -63,14 +63,8 @@ class MusicAlbumUserInterface
     published_date = handle_published_year
     on_spotify = handle_on_spotify_input
     @music_albums << MusicAlbum.new(on_spotify, published_date).to_json
-    item = Genre.new(name)
-    @items << item.to_json
-    item.add_items(@items)
+    @genres << Genre.new(name).to_json
     save
-  end
-
-  def items_handle
-    @items
   end
 
   def handle_on_spotify_input
@@ -84,10 +78,10 @@ class MusicAlbumUserInterface
   end
 
   def list_all_genres
-    puts ['No genres found', ''] if @items.empty?
+    puts ['No genres found', ''] if @genres.empty?
 
-    @items.each_with_index do |item, index|
-      puts "#{index + 1}) Name: #{item['name']}"
+    @genres.each_with_index do |genre, index|
+      puts "#{index + 1}) Name: #{genre['name']}"
     end
   end
 

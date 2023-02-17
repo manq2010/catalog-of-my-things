@@ -12,9 +12,7 @@ class Author
   end
 
   def add_item(item)
-    return if items.any? { |i| i.id == item.id }
-
-    @items << item
+    @items << item unless @items.include?(self)
     item.author = self
   end
 

@@ -1,5 +1,7 @@
 require_relative './game_ui'
 require_relative '../modules/author'
+require 'fileutils'
+
 
 class AuthorUserInterface
   FILE_LOCATION = './data/authors.json'.freeze
@@ -9,23 +11,35 @@ class AuthorUserInterface
   end
 
   def load(items)
-    return [] if File.size(FILE_LOCATION).zero?
-
-    data = JSON.parse(File.read(FILE_LOCATION))
-    authors = []
-    data.each do |author|
-      new_author = Author.new(author['first_name'], author['last_name'])
-      authors << new_author
-
-      author['items'].each do |_author_id|
-        item = items.find { |element| element.id == item_id }
-        author.add_item(item) unless item.nil?
+    if File.directory?('data') && File.file?(FILE_LOCATION)
+      if File.zero?(FILE_LOCATION)
+        []
+      else
+        data = JSON.parse(File.read(FILE_LOCATION))
+        authors = []
+        data.each do |author|
+          new_author = Author.new(author['first_name'], author['last_name'])
+          authors << new_author
+  
+          author['items'].each do |item_id|
+            item = items.find { |element| element.id == item_id }
+            author.add_item(item) unless item.nil?
+          end
+        end
+        authors
       end
+    elsif File.directory?('data') && !File.exist?(FILE_LOCATION)
+      FileUtils.touch(FILE_LOCATION)
+      []
+    else
+      FileUtils.mkdir_p(['data'])
+      FileUtils.touch(FILE_LOCATION)
+      []
     end
-    authors
   end
 
   def list_authors
+    return puts "There is no authors to list!" if @authors.empty?
     @authors.each_with_index do |author, index|
       puts "#{index + 1}) Author Name: #{author.first_name} #{author.last_name}"
     end

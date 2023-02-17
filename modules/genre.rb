@@ -9,7 +9,8 @@ class Genre
   end
 
   def add_items(item)
-    @items << item
+    @items << item unless @items.include?(self)
+    item.genre = self
   end
 
   def to_json(*_args)

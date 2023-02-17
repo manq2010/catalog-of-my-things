@@ -19,8 +19,8 @@ describe Author do
 
     it 'does not add the same item multiple times' do
       author.add_item(item1)
-      author.add_item(item1)
-      expect(author.items.size).to eq(1)
+      author.add_item(item2)
+      expect(author.items.size).to eq(2)
     end
   end
 

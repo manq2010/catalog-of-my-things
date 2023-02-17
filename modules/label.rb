@@ -9,8 +9,9 @@ class Label
     @items = []
   end
 
-  def add_items(item)
-    @items << item
+  def add_item(item)
+    @items << item unless @items.include? (self)
+    item.label = self
   end
 
   def to_json(*_args)

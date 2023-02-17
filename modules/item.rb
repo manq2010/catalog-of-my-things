@@ -1,6 +1,8 @@
+require 'time'
+
 class Item
-  attr_accessor :genre, :author, :published_date
-  attr_reader :id, :archived, :label
+  attr_accessor :genre, :author, :published_date, :label, :genre, :author
+  attr_reader :id, :archived
 
   def initialize(published_date, archived: true)
     @id = Random.rand(0...1000)
@@ -12,10 +14,15 @@ class Item
     @archived = true if can_be_archived?
   end
 
-  # def label=(label)
-  #   @label = label
-  #   @label.items.push(self) unless label.items.include?(self)
-  # end
+  def add_label(label)
+    self.label = (label)
+    label.add_item(self) unless label.items.include? (self)
+  end
+
+  def add_genre(genre)
+    self.genre = (genre)
+    genre.add_item(self) unless genre.items.include?(self)
+  end
 
   def add_author(author)
     self.author = (author)

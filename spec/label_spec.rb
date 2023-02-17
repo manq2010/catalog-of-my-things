@@ -20,9 +20,14 @@ describe Label do
       expect(label.items).to be_empty
     end
 
-    it 'add items' do
-      label.add_items(item)
-      expect(label.items).to include(item)
+    it 'sets the label of the item to be the current label' do
+      label.add_item(item)
+      expect(item.label).to eq(label)
+    end
+
+    it 'does not add the same item multiple times' do
+      label.add_item(item)
+      expect(label.items.size).to eq(1)
     end
   end
 

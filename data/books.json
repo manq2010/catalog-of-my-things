@@ -33,5 +33,10 @@
     "publisher": "mono",
     "cover_state": "new",
     "published_date": 2030
+  },
+  {
+    "publisher": "yiff",
+    "cover_state": "nab",
+    "published_date": 2030
   }
 ]

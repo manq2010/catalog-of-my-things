@@ -40,7 +40,6 @@ class MusicAlbumUserInterface
     published_date = handle_published_year
     on_spotify = handle_on_spotify_input
     @music_albums << MusicAlbum.new(on_spotify, published_date).to_json
-    puts @music_albums
     item = Genre.new(name)
     @items << item.to_json
     item.add_items(@items)

@@ -4,7 +4,7 @@ describe Book do
   let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2018) }
 
   describe '#initialize' do
-    it 'should initialize a Book obsject' do
+    it 'should initialize a Book object' do
       expect(book).to be_an_instance_of(Book)
     end
 
@@ -27,40 +27,33 @@ describe Book do
 
   describe '#can_be_archived?' do
     context 'when cover state is not bad' do
-      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2015) }
+      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2015, archived: false) }
 
       it 'returns false' do
-        allow(book).to receive(:cover_state).and_return('new')
         expect(book.send(:can_be_archived?)).to be_falsey
       end
     end
 
     context 'when cover state is bad' do
-      let(:book) { Book.new('Mancoba Sihlongonyane', 'bad', 2005) }
+      let(:book) { Book.new('Mancoba Sihlongonyane', 'bad', 2005, archived: false) }
 
-      it 'returns false' do
-        allow(book).to receive(:published_more_than_10_years_ago?).and_return(true)
-        allow(book).to receive(:cover_state).and_return('bad')
-        expect(book.send(:can_be_archived?)).to be_falsey
+      it 'returns true' do
+        expect(book.send(:can_be_archived?)).to be_truthy
       end
     end
 
     context 'when published more than 10 years ago and cover state is not bad' do
-      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2005) }
+      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2005, archived: false) }
 
       it 'returns true' do
-        allow(book).to receive(:published_more_than_10_years_ago?).and_return(true)
-        allow(book).to receive(:cover_state).and_return('new')
         expect(book.send(:can_be_archived?)).to be_truthy
       end
     end
 
     context 'when published less than 10 years ago and cover state is not bad' do
-      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2019) }
+      let(:book) { Book.new('Mancoba Sihlongonyane', 'new', 2019, archived: false) }
 
       it 'returns false' do
-        allow(book).to receive(:published_more_than_10_years_ago?).and_return(false)
-        allow(book).to receive(:cover_state).and_return('new')
         expect(book.send(:can_be_archived?)).to be_falsey
       end
     end

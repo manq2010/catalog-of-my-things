@@ -2,6 +2,7 @@ require_relative '../modules/music_album'
 require_relative '../modules/item'
 require_relative '../modules/genre'
 require 'json'
+require 'fileutils'
 
 class MusicAlbumUserInterface
   FILE_LOCATION = './data/music_albums.json'.freeze
@@ -15,11 +16,33 @@ class MusicAlbumUserInterface
   end
 
   def load
-    File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
+    if File.directory?('data') && File.file?(FILE_LOCATION)
+
+      File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
+
+    elsif File.directory?('data') && !File.exist?(FILE_LOCATION)
+      FileUtils.touch(FILE_LOCATION)
+      []
+    else
+      FileUtils.mkdir_p(['data'])
+      FileUtils.touch(FILE_LOCATION)
+      []
+    end
   end
 
   def load_two
-    File.zero?(FILE_LOCATION2) ? [] : JSON.parse(File.read(FILE_LOCATION2))
+    if File.directory?('data') && File.file?(FILE_LOCATION2)
+
+      File.zero?(FILE_LOCATION2) ? [] : JSON.parse(File.read(FILE_LOCATION2))
+
+    elsif File.directory?('data') && !File.exist?(FILE_LOCATION2)
+      FileUtils.touch(FILE_LOCATION2)
+      []
+    else
+      FileUtils.mkdir_p(['data'])
+      FileUtils.touch(FILE_LOCATION2)
+      []
+    end
   end
 
   def save
@@ -61,7 +84,7 @@ class MusicAlbumUserInterface
   end
 
   def list_all_genres
-    puts ['No label found', ''] if @items.empty?
+    puts ['No genres found', ''] if @items.empty?
 
     @items.each_with_index do |item, index|
       puts "#{index + 1}) Name: #{item['name']}"

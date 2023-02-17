@@ -1,5 +1,7 @@
 require_relative '../modules/game'
 require 'date'
+require 'json'
+require 'fileutils'
 
 class GameUserInterface
   FILE_LOCATION = './data/games.json'.freeze
@@ -10,7 +12,18 @@ class GameUserInterface
   end
 
   def load
-    File.size(FILE_LOCATION).zero? ? [] : JSON.parse(File.read(FILE_LOCATION))
+    if File.directory?('data') && File.file?(FILE_LOCATION)
+
+      File.zero?(FILE_LOCATION) ? [] : JSON.parse(File.read(FILE_LOCATION))
+
+    elsif File.directory?('data') && !File.exist?(FILE_LOCATION)
+      FileUtils.touch(FILE_LOCATION)
+      []
+    else
+      FileUtils.mkdir_p(['data'])
+      FileUtils.touch(FILE_LOCATION)
+      []
+    end
   end
 
   def save

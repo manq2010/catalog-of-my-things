@@ -1,42 +1,7 @@
 [
   {
-    "publisher": "Test publisher",
-    "cover_state": "new",
-    "published_date": 2017
-  },
-  {
-    "publisher": "rer",
-    "cover_state": "new",
-    "published_date": 2014
-  },
-  {
-    "publisher": "ere",
-    "cover_state": "r",
+    "publisher": "ew",
+    "cover_state": "wew",
     "published_date": 0
-  },
-  {
-    "publisher": "re",
-    "cover_state": "ew",
-    "published_date": 2011
-  },
-  {
-    "publisher": "moncobo",
-    "cover_state": "bad",
-    "published_date": 2020
-  },
-  {
-    "publisher": "ahmed",
-    "cover_state": "bad",
-    "published_date": 2010
-  },
-  {
-    "publisher": "mono",
-    "cover_state": "new",
-    "published_date": 2030
-  },
-  {
-    "publisher": "yiff",
-    "cover_state": "nab",
-    "published_date": 2030
   }
 ]

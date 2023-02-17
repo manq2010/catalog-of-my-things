@@ -23,6 +23,17 @@ class Game < Item
   private
 
   def can_be_archived?
-    super && Date.today.year - @last_played_at.year > 2
+    super && (Time.now.year - @published_date) > 2
   end
 end
+
+# def can_be_archived?
+#   today = Date.today
+#   years_since_publication = today.year - @published_date.year
+#   if years_since_publication >= 2
+#     years_since_last_played = today.year - @last_played_at.year
+#     years_since_last_played >= 2
+#   else
+#     false
+#   end
+# end

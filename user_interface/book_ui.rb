@@ -2,6 +2,7 @@ require_relative '../modules/book'
 require_relative '../modules/item'
 require_relative '../modules/label'
 require 'json'
+require 'fileutils'
 
 class BookUserInterface
   FILE_LOCATIONS = {
@@ -47,10 +48,18 @@ class BookUserInterface
 
   def load_data(type)
     path = FILE_LOCATIONS[type]
-    if File.zero?(path)
+
+    if File.directory?('data') && File.file?(path)
+
+      File.zero?(path) ? [] : JSON.parse(File.read(path))
+
+    elsif File.directory?('data') && !File.exist?(path)
+      FileUtils.touch(path)
       []
     else
-      JSON.parse(File.read(path))
+      FileUtils.mkdir_p(['data'])
+      FileUtils.touch(path)
+      []
     end
   end
 

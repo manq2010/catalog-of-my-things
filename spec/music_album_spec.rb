@@ -23,13 +23,39 @@ describe MusicAlbum do
     end
   end
 
+  # describe '#can_be_archived?' do
+  #   context 'when on_spotify is not false' do
+  #     let(:music_album) { MusicAlbum.new('Nasheed', 2002) }
+
+  #     it 'returns true' do
+  #       allow(music_album).to receive(:on_spotify).and_return('true')
+  #       expect(music_album.send(:can_be_archived?)).to be_truthy
+  #     end
+  #   end
+  # end
+
   describe '#can_be_archived?' do
     context 'when on_spotify is not false' do
-      let(:music_album) { MusicAlbum.new('Nasheed', 2002) }
+      let(:music_album) { MusicAlbum.new(true, 2002) }
 
       it 'returns true' do
-        allow(music_album).to receive(:on_spotify).and_return('true')
         expect(music_album.send(:can_be_archived?)).to be_truthy
+      end
+    end
+
+    context 'when on_spotify is false' do
+      let(:music_album) { MusicAlbum.new(false, 2002) }
+
+      it 'returns false' do
+        expect(music_album.send(:can_be_archived?)).to be_falsey
+      end
+    end
+
+    context 'when on_spotify is nil' do
+      let(:music_album) { MusicAlbum.new(nil, 2002) }
+
+      it 'returns false' do
+        expect(music_album.send(:can_be_archived?)).to be_falsey
       end
     end
   end

@@ -7,14 +7,12 @@ class MusicAlbum < Item
   end
 
   def to_json(*_args)
-    { 'on_spotify' => @on_spotify, 'published_
-      date' => @published_date }
+    { 'on_spotify' => @on_spotify, 'published_date' => @published_date }
   end
 
   private
 
   def can_be_archived?
-    # super && @on_spotify ? true : false
     (Time.now.year - @published_date) > 10 && @on_spotify != true
   end
 end
